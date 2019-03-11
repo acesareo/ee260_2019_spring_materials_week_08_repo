@@ -1,26 +1,32 @@
 ---
-title: 
-author:
-partner:
-date:
+title: Lab 5
+author:Angelica Cesareo , Vinh Phan
 ---
-# Task number X-X
+# Task number 1-1
+For the first part of the lab we were asked to design a SR latch and develop a test bench for it. we tried researching examples of test benches but we had a hard time understanding them. The closest we got to was this one.
 
-During the lab, follow the steps in the Workbook, and complete the following.
-- Fill in the code snippets to complete your design.
-- Demonstrate behavioral simulation to the TA.
-- Demonstrate timing simulation to the TA (if required).
-- Demonstrate the implementation (with the Basys 3 board) to the TA.
+module SR_latch_dataflow (input R, input S, output Q, output Qbar); 
+assign #2 Q_i = Q;
+assign #2 Qbar_i = Qbar; 
+assign #2 Q = ~ (R | Qbar);
+assign #2 Qbar = ~ (S | Q);
+endmodule
 
-In the report, complete the following.
-- Explain the objective of the task.
-- Include all your project codes in the [codes/lab](../../codes/lab) folder,
-  if required.
-- Explain your code.
-- Include screenshots of the simulations in this folder, and insert them into
-  the markdown file.
-- Explain why the simulations are correct.
-- Include pictures of the Basys 3 board running your implementation, and
-  insert them into the markdown file.
-- Explain why the implementation is correct.
-- Conclude with the problem you encounterd during the task.
+
+SR_latch_dataflow DUT1 (.S(S), .R(R), .Q(Q), .Qbar(Qbar));
+
+module testbench_SR_latch;
+reg S, R;
+wire Q;
+wire Qbar;
+
+integer i;
+
+initial
+ begin
+  $recordfile("file1.trn");
+  $recordvars();
+ end
+
+
+endmodule
